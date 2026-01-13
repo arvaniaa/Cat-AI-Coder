@@ -39,7 +39,7 @@ REGRAS DE OPERAÇÃO:
 with st.sidebar:
 
     # Define o título da barra lateral
-    st.title("🐈Cat AI Coder 1.1")
+    st.title("🐈Cat AI Coder 1.2")
 
     # Mostra um texto explicativo sobre o assistente
     st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity para ajudar iniciantes.")
@@ -149,5 +149,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # Obrigado DSA
