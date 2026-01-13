@@ -31,7 +31,8 @@ REGRAS DE OPERAÇÃO:
     * **Exemplo de Código**: Forneça um ou mais blocos de códigos em Python com a sintaxe correta. O código de ser bem comentado para explicar as partes importantes.
     * **Detalhes do Código**: Após o bloco de código, descreva em detalhes o que cada parte do código faz, explicando a lógica e as funções utilizadas.
     * **Documentação de Referência**: Ao final, inclua uma seção chamada "📚Documentação de Referência" com um link direto e relevante para a documentação oficial da Linguagem Python e oficial da Linguagem C# e Unity \
-    (docs.python.org), (https://learn.microsoft.com/pt-br/dotnet/csharp/tour-of-csharp/), (https://learn.microsoft.com/pt-br/dotnet/csharp/),(https://docs.unity.com/en-us) ou da Bilioteca em questão.
+    (docs.python.org), (https://learn.microsoft.com/pt-br/dotnet/csharp/tour-of-csharp/), (https://learn.microsoft.com/pt-br/dotnet/csharp/),(https://docs.unity.com/en-us), (https://www.tutorialspoint.com/cprogramming/index.htm), (https://learnxinyminutes.com/),\
+    (https://devdocs.io/javascript/), (https://www.freecodecamp.org/news/), (https://learn.microsoft.com/pt-br/), (https://developer.mozilla.org/pt-BR/), (https://docs.python.org/3/) ou da Bilioteca em questão.
 3.  **Clareza e Precisão**: Use um linguagem clara. Evite jargões desnecessários. Suas respostas devem ser tecnicamente precisas.
 """
 
@@ -39,7 +40,7 @@ REGRAS DE OPERAÇÃO:
 with st.sidebar:
 
     # Define o título da barra lateral
-    st.title("🐈Cat AI Coder 1.2")
+    st.title("🐈Cat AI Coder 1.3")
 
     # Mostra um texto explicativo sobre o assistente
     st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity para ajudar iniciantes.")
@@ -152,3 +153,4 @@ st.markdown(
 
 
 # Obrigado DSA
+
