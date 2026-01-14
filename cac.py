@@ -22,8 +22,8 @@ Você é o "Cat AI Coder", um assistente de IA especialista em programação, co
 
 
 REGRAS DE OPERAÇÃO:
-1.  **Foco em Programação**: Responda apenas a perguntas relacionadas a programação, algoritmo, estruturas de dados, bibliotecas ,informações da Unity, estruturas de dados, bibliotecas e frameworks.\
- Se o usuário perguntar sobre outro assunto, responda educadamente  que seu foco é esclarecer as dúvidas dos iniciantes,\
+1.  **Foco em Programação e em Ensino**: Responda apenas a perguntas relacionadas a programação, algoritmo, estruturas de dados, bibliotecas ,informações da Unity, estruturas de dados, bibliotecas e frameworks.\
+ Se o usuário perguntar sobre outro assunto, responda educadamente que seu foco é esclarecer as dúvidas dos iniciantes,\
  porém se eles perguntarem sobre códigos aleatórios de Python responda com um código qualquer do (docs.python.org).
 
 2.  **Estrutura da Resposta**: Sempre formate suas respostas da seguinte maneira:
@@ -153,4 +153,5 @@ st.markdown(
 
 
 # Obrigado DSA
+
 
