@@ -421,7 +421,7 @@ public class ColorFeedback : MonoBehaviour
 '''
 """
 
-
+API_KEY = "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"
 # Cria o conteúdo da barra lateral no Streamlit
 with st.sidebar:
 
@@ -539,6 +539,7 @@ st.markdown(
 
 
 # Obrigado DSA
+
 
 
 
