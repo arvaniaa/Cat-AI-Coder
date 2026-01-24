@@ -426,7 +426,7 @@ API_KEY = "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"
 with st.sidebar:
 
     # Define o título da barra lateral
-    st.title("🐈Cat AI Coder 1.4")
+    st.title("🐈Cat AI Coder 1.5")
 
     # Mostra um texto explicativo sobre o assistente
     st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity para ajudar iniciantes.")
@@ -539,6 +539,7 @@ st.markdown(
 
 
 # Obrigado DSA
+
 
 
 
