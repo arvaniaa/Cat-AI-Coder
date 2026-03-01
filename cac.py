@@ -432,9 +432,10 @@ with st.sidebar:
     api_key_preenchida = os.getenv("GROQ_API_KEY", "")
 
     # Campo para a chave (já virá preenchido se estiver no .env)
-    
+    groq_api_key = st.text_input(
+        "Insira sua API Key Groq",
         value=api_key_preenchida,
-        
+        type="password",
         help="Obtenha sua chave em https://console.groq.com/keys"
     )
 
@@ -513,5 +514,6 @@ st.markdown(
 )
 
 #Obrigado DSA
+
 
 
