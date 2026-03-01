@@ -422,7 +422,6 @@ public class ColorFeedback : MonoBehaviour
 }
 '''
 """
-"
 # Conteúdo da barra lateral
 with st.sidebar:
     st.title("🐈Cat AI Coder 1.4")
@@ -514,6 +513,7 @@ st.markdown(
 )
 
 #Obrigado DSA
+
 
 
 
