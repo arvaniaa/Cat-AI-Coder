@@ -428,17 +428,16 @@ with st.sidebar:
     st.title("🐈Cat AI Coder 1.4")
     st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity.")
 
-    with st.expander("Configurações de API"):
-    # Busca a chave no arquivo .env ou no sistema. Se não achar, fica vazio.
-    api_key_preenchida = os.getenv("GROQ_API_KEY", "")
+    # A mágica acontece aqui: 
+    # O código pega a chave do .env e guarda na variável groq_api_key
+    # Sem criar nenhum campo visual na tela.
+    groq_api_key = os.getenv("GROQ_API_KEY", "")
 
-    # Campo para a chave (já virá preenchido se estiver no .env)
-    groq_api_key = st.text_input(
-        "Insira sua API Key Groq",
-        value=api_key_preenchida,
-        type="password",
-        help="Obtenha sua chave em https://console.groq.com/keys"
-    )
+    # Apenas um aviso visual discreto para você saber que está conectado
+    if groq_api_key:
+        st.success("✅ API Key carregada com sucesso!")
+    else:
+        st.error("❌ API Key não encontrada no arquivo .env")
 
     st.markdown("---")
     st.markdown("Desenvolvido para auxiliar em dúvidas de Python e C#. AI pode cometer erros.")
@@ -515,6 +514,7 @@ st.markdown(
 )
 
 #Obrigado DSA
+
 
 
 
