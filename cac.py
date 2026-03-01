@@ -437,7 +437,7 @@ with st.sidebar:
       # Campo para a chave (já virá preenchido se estiver no .env)
   
    
-    )
+    
 
     st.markdown("---")
     st.markdown("Desenvolvido para auxiliar em dúvidas de Python e C#. AI pode cometer erros.")
@@ -514,6 +514,7 @@ st.markdown(
 )
 
 #Obrigado DSA
+
 
 
 
