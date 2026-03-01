@@ -422,7 +422,13 @@ public class ColorFeedback : MonoBehaviour
 }
 '''
 """
-# Busca a chave no arquivo .env ou no sistema. Se não achar, fica vazio.
+"
+# Conteúdo da barra lateral
+with st.sidebar:
+    st.title("🐈Cat AI Coder 1.4")
+    st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity.")
+
+    # Busca a chave no arquivo .env ou no sistema. Se não achar, fica vazio.
     api_key_preenchida = os.getenv("GROQ_API_KEY", "")
 
       # Campo para a chave (já virá preenchido se estiver no .env)
@@ -431,15 +437,6 @@ public class ColorFeedback : MonoBehaviour
         value=api_key_preenchida,
         type="password",
         help="Obtenha sua chave em https://console.groq.com/keys"
-# Conteúdo da barra lateral
-with st.sidebar:
-    st.title("🐈Cat AI Coder 1.4")
-    st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity.")
-
-   
-
-
-        
     )
 
     st.markdown("---")
@@ -517,6 +514,7 @@ st.markdown(
 )
 
 #Obrigado DSA
+
 
 
 
