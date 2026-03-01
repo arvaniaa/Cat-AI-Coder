@@ -1,14 +1,16 @@
-
 # Importa módulo para interagir com o sistema operacional
 import os 
-
 # Importa a biblioteca Streamlit para a interface web interativa
 import streamlit as st
-
-# Importa a classe groq para se conectar à API da plataforma Groq e acessar o LLM
+# Importa a classe groq para se conectar à API da plataforma Groq
 from groq import Groq
+# Importa para carregar variáveis de ambiente de um arquivo .env
+from dotenv import load_dotenv
 
-# Configura a página do Streamlit com título, ícone, layout e estado inicial da sidebar   
+# Tenta carregar o arquivo .env se ele existir
+load_dotenv()
+
+# Configura a página do Streamlit
 st.set_page_config(
     page_title="Cat AI Coder",
     page_icon="🐈",
@@ -16,7 +18,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Define um prompt de sistema que descreve as regras e comportamentos de IA
+# Define o prompt de sistema (Regras da IA)
 CUSTOM_PROMPT = """
 Você é o "Cat AI Coder", um assistente de IA especialista em programação, com foco principal em Python, Java e C# com aplicações em jogos da Unity. Sua missão é ajudar desenvolvedores iniciantes com dúvidas de programação de forma clara, precisa e útil.
 
@@ -421,111 +423,86 @@ public class ColorFeedback : MonoBehaviour
 '''
 """
 
-# Cria o conteúdo da barra lateral no Streamlit
+# Conteúdo da barra lateral
 with st.sidebar:
-
-    # Define o título da barra lateral
     st.title("🐈Cat AI Coder 1.4")
+    st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity.")
 
-    # Mostra um texto explicativo sobre o assistente
-    st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity para ajudar iniciantes.")
+    # Busca a chave no arquivo .env ou no sistema. Se não achar, fica vazio.
+    api_key_preenchida = os.getenv("GROQ_API_KEY", "")
 
-    # Campo para inserir  a chave de API da Groq
+    # Campo para a chave (já virá preenchido se estiver no .env)
     groq_api_key = st.text_input(
-        "Insira usa API Key Groq",
+        "Insira sua API Key Groq",
+        value=api_key_preenchida,
         type="password",
         help="Obtenha sua chave em https://console.groq.com/keys"
     )
 
-    # Adiciona linhas divisórias e explicações extras na barra lateral
     st.markdown("---")
-    st.markdown("Desenvolvido para auxiliar em suas dúvidas de programação com Linguagem Python e C#. AI pode cometer erros. Sempre verifique suas respostas.")
-
-    st.markdown("---")
+    st.markdown("Desenvolvido para auxiliar em dúvidas de Python e C#. AI pode cometer erros.")
     st.markdown("Feito por Luis Henrique Arvani")
- 
-    # Título principal do App
-    st.title("Poop Company - Cat AI Coder")
 
-    # Subtítulo adicional
-    st.title("Assistente Pessoal de Programação Python e C#")
+# Título principal do App
+st.title("Poop Company - Cat AI Coder")
+st.caption("Faça sua pergunta sobre a Linguagem Python e C# e obtenha código, explicações e referências.")
 
-    # Texto auxiliar abaixo do título
-    st.caption("Faça sua pergunta sobre a Linguagem Python e C# e obtenha código, explicações e referências.")
+# Inicializa o histórico de mensagens
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-    # Inicializa o histórico de mensagens na sessão, caso ainda não exista
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+# Exibe mensagens anteriores
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-    # Exibe todas as mensagens anteriores armazenadas no estado de sessão
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-# Inicializa a variável do cliente Groq como None
+# Inicializa o cliente Groq
 cliente = None
 
-# Verifica se o usuário forneceu a chave Api do Groq
 if groq_api_key:
-
     try:
-
-          # Cria cliente Groq com a chave de API fornecida
-          cliente = Groq(api_key = groq_api_key)
-
+        cliente = Groq(api_key=groq_api_key)
     except Exception as e:
-
-            # Exibe erro caso haja problema ao inicializar cliente
-            st.error(f"Erro ao inicializar o cliente Groq: {e}")
-            st.stop()
-
-# Caso não tenha chave, mas já existam mensagens, mostra aviso
+        st.error(f"Erro ao inicializar o cliente Groq: {e}")
+        st.stop()
 elif st.session_state.messages:
-     st.warning("Por favor, insira sua API Key da Groq na barra lateral para continuar.")
+    st.warning("Por favor, insira sua API Key da Groq na barra lateral para continuar.")
 
-# Captura a entrada do usuário no chat
+# Captura a entrada do usuário
 if prompt := st.chat_input("Qual sua dúvida sobre Python ou C#?"):
-
-    # Se não houver cliente válido, mostra aviso e para a execução
     if not cliente:
         st.warning("Por favor, insira sua API Key da Groq na barra lateral para começar.")
         st.stop()
 
-    # Armazena a mensagem do usuário no estado da sessão
+    # Adiciona mensagem do usuário ao histórico
     st.session_state.messages.append({"role": "user", "content": prompt})
-
-    # Prepara mensagens para enviar à API, incluindo prompt de sistema
     with st.chat_message("user"):
-         st.markdown(prompt)
+        st.markdown(prompt)
 
+    # Prepara as mensagens para a API
     messages_for_api = [{"role": "system", "content": CUSTOM_PROMPT}]
     for msg in st.session_state.messages:
         messages_for_api.append(msg)
 
-    # Cria a resposta do assistente no chat
+    # Resposta da IA
     with st.chat_message("assistant"):
-
         with st.spinner("Analisando sua pergunta..."):
-
             try:
-                # Faz a chamada para a API
                 chat_completion = cliente.chat.completions.create(
-                    messages = messages_for_api,
-                    model = "llama-3.3-70b-versatile",
-                    temperature = 0.7,
-                    max_tokens = 2048,
+                    messages=messages_for_api,
+                    model="llama-3.3-70b-versatile",
+                    temperature=0.7,
+                    max_tokens=2048,
                 )
 
                 cat_ai_resposta = chat_completion.choices[0].message.content
                 st.markdown(cat_ai_resposta)
-
-                # Salva a resposta da IA no histórico
                 st.session_state.messages.append({"role": "assistant", "content": cat_ai_resposta})
 
             except Exception as e:
-                st.error(f"Ocorreu um erro ao se comunicar com a API da Groq:  {e}")
+                st.error(f"Ocorreu um erro ao se comunicar com a API da Groq: {e}")
 
-# Rodapé HTML corrigido
+# Rodapé
 st.markdown(
     """
     <div style="text-align: center; color: gray;">
@@ -536,15 +513,4 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-# Obrigado DSA
-
-
-
-
-
-
-
-
-
-
+#Obrigado DSA
