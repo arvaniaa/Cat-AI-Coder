@@ -436,8 +436,7 @@ with st.sidebar:
     st.title("🐈Cat AI Coder 1.4")
     st.markdown("Um assistente de IA focado em programação Python e C# com aplicações em jogos da Unity.")
 
-    # Busca a chave no arquivo .env ou no sistema. Se não achar, fica vazio.
-    api_key_preenchida = os.getenv("GROQ_API_KEY", "")
+   
 
 
         
@@ -518,6 +517,7 @@ st.markdown(
 )
 
 #Obrigado DSA
+
 
 
 
